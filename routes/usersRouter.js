@@ -4,4 +4,6 @@ const userRouter = Router();
 
 userRouter.get("/", usersController.getHomePage);
 
+module.exports = userRouter; 
+
 

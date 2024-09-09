@@ -30,7 +30,7 @@ async function createTables() {
             );
         `;
 
-        await query(createMovieTable); 
+        await query(createMovieTable);
         await query(createGenresTable);
         await query(createMovieGenresTable);
 

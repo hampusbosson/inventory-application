@@ -5,9 +5,35 @@ body {
 }
 
 .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: rgb(35, 35, 35);
+    padding: 1.5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.header-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 h1 {
     color: white;
 }
+
+button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+}
+
+button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+

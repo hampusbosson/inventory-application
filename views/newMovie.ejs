@@ -12,7 +12,71 @@
         </div>
     </div>
     <div class="main-content">
-        
+        <div class="movie-form-container">
+            <form action="/movies/new" method="POST" class="movie-form">
+                <div class="form-group">
+                    <label for="movie-name">Movie Name</label>
+                    <input type="text" name="movie-name" id="movie-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="release-year">Release Year</label>
+                    <input type="number" name="release-year" id="release-year" min="1900" max="2026" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="genres">Pick Movie Genres</label>
+                    <div class="genres">
+                        <input type="checkbox" name="genres" value="action" id="genre-action">
+                        <label for="genre-action">Action</label><br>
+                
+                        <input type="checkbox" name="genres" value="comedy" id="genre-comedy">
+                        <label for="genre-comedy">Comedy</label><br>
+                
+                        <input type="checkbox" name="genres" value="drama" id="genre-drama">
+                        <label for="genre-drama">Drama</label><br>
+                
+                        <input type="checkbox" name="genres" value="thriller" id="genre-thriller">
+                        <label for="genre-thriller">Thriller</label><br>
+            
+                        <input type="checkbox" name="genres" value="horror" id="genre-horror">
+                        <label for="genre-horror">Horror</label><br>
+                
+                        <input type="checkbox" name="genres" value="scifi" id="genre-scifi">
+                        <label for="genre-scifi">Sci-Fi</label><br>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <input type="number" name="rating" id="rating" min="1" max="10" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="duration">Runtime (in minutes)</label>
+                    <input type="number" name="duration" id="duration" min="1" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" rows="4" cols="50" style="resize: vertical;"></textarea>
+                </div>
+            
+                <div class="form-group">
+                    <label for="posterURL">Poster URL</label>
+                    <input type="text" name="posterURL" id="posterURL">
+                </div>
+            
+                <div class="form-group">
+                    <label for="trailerURL">Trailer URL</label>
+                    <input type="text" name="trailerURL" id="trailerURL">
+                </div>
+            
+                <div class="form-group">
+                    <button type="submit" class="form-btn">Add Movie</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 

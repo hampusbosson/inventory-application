@@ -1,10 +1,12 @@
 const db = require("../db/queries");
 const {body, validationResult} = require("express-validator");
 
+const pageTitle = "MovieHub"
+
 const getHomePage = (req, res) => {
     try {
         res.render("index", {
-            title: "MovieHub",
+            title: pageTitle,
         });
     } catch(err) {
         console.error("Failed to load page: ", {err});
@@ -14,7 +16,9 @@ const getHomePage = (req, res) => {
 
 const getMoviePage = (req, res) => {
     try {
-        res.render("movies")
+        res.render("movies", {
+            title: pageTitle,
+        })
     } catch(err) {
         console.error("Failder to load page: ", err); 
         res.status(500).send("an error occured while loading the page.")
@@ -23,7 +27,9 @@ const getMoviePage = (req, res) => {
 
 const getGenresPage = (req, res) => {
     try {
-        res.render("genres")
+        res.render("genres", {
+            title: pageTitle,
+        })
     } catch(err) {
         console.error("Failder to load page: ", err); 
         res.status(500).send("an error occured while loading the page.")

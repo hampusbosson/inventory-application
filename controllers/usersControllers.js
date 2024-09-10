@@ -36,10 +36,22 @@ const getGenresPage = (req, res) => {
     }
 }
 
+const getNewMoviePage = (req, res) => {
+    try {
+        res.render("newMovie", {
+            title: pageTitle,
+        })
+    } catch(err) {
+        console.error("Failder to load page: ", err); 
+        res.status(500).send("an error occured while loading the page.")
+    }
+}
+
 module.exports = {
     getHomePage,
     getMoviePage,
-    getGenresPage
+    getGenresPage,
+    getNewMoviePage
 }
 
 

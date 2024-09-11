@@ -29,8 +29,8 @@ const getHomePage = (req, res) => {
 
 async function getMoviePage (req, res) {
   try {
-    const movies = await db.getAllmovies();
-    
+    const movies = await db.getAllMovies();
+
     res.render("movies", {
       title: pageTitle,
       movies: movies,
@@ -41,10 +41,13 @@ async function getMoviePage (req, res) {
   }
 };
 
-const getGenresPage = (req, res) => {
+async function getGenresPage (req, res) {
   try {
+    const genres = await db.getAllGenres();
+
     res.render("genres", {
       title: pageTitle,
+      genres: genres,
     });
   } catch (err) {
     console.error("Failder to load page: ", err);

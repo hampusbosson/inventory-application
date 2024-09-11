@@ -15,13 +15,13 @@
         <div class="movie-form-container">
             <form action="/movies/new" method="POST" class="movie-form">
                 <div class="form-group">
-                    <label for="movie-name">Movie Name</label>
-                    <input type="text" name="movie-name" id="movie-name" required>
+                    <label for="mname">Movie Name</label>
+                    <input type="text" name="name" id="name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="release-year">Release Year</label>
-                    <input type="number" name="release-year" id="release-year" min="1900" max="2026" required>
+                    <label for="year">Release Year</label>
+                    <input type="number" name="year" id="year" min="1900" max="2026" required>
                 </div>
             
                 <div class="form-group">
@@ -54,7 +54,7 @@
             
                 <div class="form-group">
                     <label for="duration">Runtime (in minutes)</label>
-                    <input type="number" name="duration" id="duration" min="1" required>
+                    <input type="number" name="duration" id="duration" min="1" max="1000" required>
                 </div>
             
                 <div class="form-group">

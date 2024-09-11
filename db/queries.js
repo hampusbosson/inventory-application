@@ -82,6 +82,21 @@ async function insertMovieGenre(movieId, genreName) {
   }
 }
 
+async function getAllmovies() {
+  const getAllMoviesQuery = `
+  SELECT * FROM movies;
+  `
+  try {
+    const result = await query(getAllMoviesQuery);
+
+    return result.rows;
+  } catch(err) {
+    console.error('Error getting movies:', err.message);
+    throw new Error(`Error getting movies: ${err.message}`);
+  }
+}
+
 module.exports = {
   insertMovie,
+  getAllmovies,
 };

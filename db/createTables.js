@@ -7,7 +7,7 @@ async function createTables() {
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 rating DECIMAL(3, 2) CHECK (rating >= 0 AND rating <= 10),
-                releaseDate DATE NOT NULL,
+                releaseyear INT NOT NULL,
                 description TEXT,
                 posterURL TEXT,
                 trailerURL TEXT, 

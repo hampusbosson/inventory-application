@@ -12,7 +12,18 @@
         </div>
     </div>
     <div class="main-content">
-        
+        <div class="genre-top">
+            <h1>All Genres</h1>
+        <div class="genre-list-container">
+            <ul class="genre-list">
+                <% genres.forEach((genre) => { %>
+                    <li class="genre-entry">
+                        <img src="" alt="">
+                        <div class="genre-name"> <%= genre.name %></div>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
     </div>
 
 

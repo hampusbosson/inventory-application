@@ -13,15 +13,19 @@
     </div>
     <div class="main-content">
         <div class="movie-top">
-            <h1>All Movies</h1>
+            <h1 class="movie-header">All Movies</h1>
             <a href="/movies/new"><button class="add-mov-btn">ADD MOVIE</button></a>
         </div>
         <div class="movie-list-container">
             <ul class="movie-list">
                 <% movies.forEach((movie) => { %>
                     <li class="movie-entry">
-                        <img src="" alt="">
-                        <div class="movie-name"> <%= movie.name %></div>
+                        <button class="movie-card-btn">
+                            <div class="movie-card">
+                                <img src="<%= movie.posterurl %>" alt="Movie poster for <%= movie.name %>" class="movie-img">
+                                <div class="movie-name"> <%= movie.name %></div>
+                            </div>
+                        </button>
                     </li>
                 <% }) %>
             </ul>

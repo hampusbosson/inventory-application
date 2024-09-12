@@ -55,7 +55,16 @@ button:hover {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    max-width: 80%;
+}
+
+.movie-header {
+    margin-left: 2rem;
+}
+
+.genre-top {
+    margin-right: 54.4rem;
 }
 
 .add-mov-btn {
@@ -67,6 +76,8 @@ button:hover {
     padding: 10px;
     height: 3rem;
     width: 8rem;
+    margin: 0;
+    margin-top: 4px;
 }
 
 .add-mov-btn:hover, .form-btn:hover {
@@ -107,4 +118,72 @@ input, textarea {
     border: 1px solid white;
     border-radius: 10px;
     margin-top: 1.5rem;
+}
+
+.movie-list-container, .genre-list-container {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.movie-card {
+    border: 1px solid white;
+}
+
+.movie-card-btn {
+    margin: 0;
+    padding: 0;
+}
+
+.movie-card-btn:hover {
+    transform: scale(1.01);
+    text-decoration: none;
+}
+
+.movie-name {
+    padding: 12px;
+    font-size: 1.3rem;
+    background-color: rgb(20, 34, 34);
+    border-top: 1px solid white;
+}
+
+.movie-img {
+    width: 20rem;
+    height: 30rem;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .movie-header {
+        font-size: 1.5rem; /* Adjust the size for smaller screens */
+        margin-left: 2rem;
+    }
+
+    .add-mov-btn {
+        font-size: 0.9rem; /* Slightly reduce button text size */
+        padding: 2px; /* Adjust padding to fit smaller screens */
+        height: 2.5rem;
+        width: 7rem;
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        padding-left: 2rem; 
+        padding-right: 2rem; 
+        max-width: 100%;
+    }
 }

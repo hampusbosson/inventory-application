@@ -20,18 +20,18 @@
             <ul class="movie-list">
                 <% movies.forEach((movie) => { %>
                     <li class="movie-entry">
-                        <button class="movie-card-btn">
-                            <div class="movie-card">
-                                <img src="<%= movie.posterurl %>" alt="Movie poster for <%= movie.name %>" class="movie-img">
-                                <div class="movie-name"> <%= movie.name %></div>
-                            </div>
-                        </button>
+                        <a href="/movies/<%= encodeURIComponent(movie.name.toLowerCase().replace(/\s+/g, '-')) %>" class="movie-card-link">
+                            <button class="movie-card-btn">
+                                <div class="movie-card">
+                                    <img src="<%= movie.posterurl %>" alt="Movie poster for <%= movie.name %>" class="movie-img">
+                                    <div class="movie-name"> <%= movie.name %></div>
+                                </div>
+                            </button>
+                        </a>
                     </li>
                 <% }) %>
             </ul>
         </div>
     </div>
-
-
 </body>
 </html>

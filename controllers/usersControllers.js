@@ -100,10 +100,32 @@ const addNewMovie = [
   },
 ];
 
+async function getMovieShowcasePage(req, res) {
+  const movieName = req.params.movieName.replace(/-/g, ' '); // Convert back to movie name
+
+  try {
+    const movie = await db.getMovieByName(movieName);
+
+    if (movie) {
+      res.render("movieShowCase", {
+        title: pageTitle,
+        movieName: movieName,
+      })
+    } else {
+      res.status(404).send("Movie not found");
+    }
+  } catch(err) {
+    console.error('Error fetching movie: ', err.message);
+    throw new Error(`Error fetching movie: ${err.message}`)
+  }
+
+}
+
 module.exports = {
   getHomePage,
   getMoviePage,
   getGenresPage,
   getNewMoviePage,
   addNewMovie,
+  getMovieShowcasePage
 };

@@ -110,10 +110,25 @@ async function getAllGenres() {
   }
 }
 
+async function getMovieByName(movieName) {
+  const getMovieQuery = `
+    SELECT * FROM movies WHERE LOWER(name) = $1;
+  `;
+
+  try {
+    const result = await query(getMovieQuery, [movieName.toLowerCase()]);
+    return result.rows[0];
+  } catch(err) {
+    console.error('Error fetching movie: ', err.message); 
+    throw new Error(`Error fetching movie: ${err.message}`);
+  }
+}
+
 
 
 module.exports = {
   insertMovie,
   getAllMovies,
-  getAllGenres
+  getAllGenres,
+  getMovieByName
 };

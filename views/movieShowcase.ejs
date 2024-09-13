@@ -11,8 +11,38 @@
             <a href="/movies"><button>MOVIES</button></a>
         </div>
     </div>
-    <div class="main-content">
-        <h1><%= movieName %></h1>
+    <div class="main-content-showcase">
+        <div class="movie-content">
+            <h1 class="movie-name-showcase"><%= movie.name %></h1>
+            <div class="movie-info-top">
+                <div class="movie-info-top-left">
+                    <p class="movie-year"><%= movie.releaseyear %></p>
+                    <p>•</p>
+                    <p class="movie-playtime"><%= runtime %></p>
+                </div>
+                <div class="movie-info-top-right">
+                    <p class="imdb">IMDb RATING</p>
+                    <p class="movie-rating">
+                        <span class="rating-number"><%= movie.rating %></span> <span class="rating-total">/10</span>
+                    </p>
+                </div>
+            </div>
+            <div class="movie-visuals-container">
+                <img src="<%= movie.posterurl %>" alt="Movie poster for <%= movie.name %>" class="movie-img-showcase">
+                <iframe 
+                    width="770" 
+                    height="400" 
+                    src="https://www.youtube.com/embed/8ugaeA-nMTc" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="movie-info-bottom">
+                <p class="movie-desc">Description: <br><strong><%= movie.description %></strong></p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

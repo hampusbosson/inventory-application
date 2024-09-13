@@ -105,11 +105,13 @@ async function getMovieShowcasePage(req, res) {
 
   try {
     const movie = await db.getMovieByName(movieName);
+    const runtime = calculateMovieLength(movie.duration);
 
     if (movie) {
       res.render("movieShowCase", {
         title: pageTitle,
-        movieName: movieName,
+        movie: movie,
+        runtime: runtime,
       })
     } else {
       res.status(404).send("Movie not found");
@@ -119,6 +121,14 @@ async function getMovieShowcasePage(req, res) {
     throw new Error(`Error fetching movie: ${err.message}`)
   }
 
+}
+
+const calculateMovieLength = (duration) => {
+  const hours = Math.round(duration / 60);
+
+  const remainingMinutes = duration - (hours * 60);
+
+  return `${hours}h ${remainingMinutes}m`;
 }
 
 module.exports = {

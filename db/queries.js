@@ -124,11 +124,30 @@ async function getMovieByName(movieName) {
   }
 }
 
+async function getGenresForMovie(movieName) {
+  const getGenresQuery = `
+  SELECT g.name 
+  FROM genres G
+  JOIN movie_genres mg ON g.id = mg.genre_id
+  JOIN movies m ON mg.movie_id = m.id
+  WHERE LOWER (m.name) = $1; 
+  `;
+
+  try {
+    const result = await query(getGenresQuery, [movieName.toLowerCase()]);
+    return result.rows.map(row => row.name);
+  } catch (err) {
+    console.error('Error fetching genres: ', err.message);
+    throw new Error(`Error fetching genres: ${err.message}`);
+  }
+}
+
 
 
 module.exports = {
   insertMovie,
   getAllMovies,
   getAllGenres,
-  getMovieByName
+  getMovieByName,
+  getGenresForMovie
 };

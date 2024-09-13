@@ -105,6 +105,7 @@ async function getMovieShowcasePage(req, res) {
 
   try {
     const movie = await db.getMovieByName(movieName);
+    const genres = await db.getGenresForMovie(movieName);
     const runtime = calculateMovieLength(movie.duration);
 
     if (movie) {
@@ -112,6 +113,7 @@ async function getMovieShowcasePage(req, res) {
         title: pageTitle,
         movie: movie,
         runtime: runtime,
+        genres: genres
       })
     } else {
       res.status(404).send("Movie not found");

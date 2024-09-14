@@ -109,12 +109,14 @@ async function getMovieShowcasePage(req, res) {
     const runtime = calculateMovieLength(movie.duration);
 
     const capitalizedGenres = genres.map(genre => genre.charAt(0).toUpperCase() + genre.slice(1));
+    const youtubeEmededURL = getYouTubeEmbedURL(movie.trailerurl);
 
     if (movie) {
       res.render("movieShowCase", {
         title: pageTitle,
         movie: movie,
         runtime: runtime,
+        youtubeURL: youtubeEmededURL,
         genres: capitalizedGenres
       })
     } else {
@@ -151,7 +153,11 @@ async function deleteMovie(req, res) {
     console.error('Error deleting movie', err.message);
     throw new Error(`Error deleting movie ${err.message}`);
   }
+}
 
+const getYouTubeEmbedURL = (url) => {
+  const videoId = url.split('v=')[1]; // Extract the video ID from the full URL
+  return `https://www.youtube.com/embed/${videoId}`;
 }
 
 module.exports = {

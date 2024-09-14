@@ -108,12 +108,14 @@ async function getMovieShowcasePage(req, res) {
     const genres = await db.getGenresForMovie(movieName);
     const runtime = calculateMovieLength(movie.duration);
 
+    const capitalizedGenres = genres.map(genre => genre.charAt(0).toUpperCase() + genre.slice(1));
+
     if (movie) {
       res.render("movieShowCase", {
         title: pageTitle,
         movie: movie,
         runtime: runtime,
-        genres: genres
+        genres: capitalizedGenres
       })
     } else {
       res.status(404).send("Movie not found");

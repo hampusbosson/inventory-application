@@ -41,7 +41,18 @@
                 </iframe>
             </div>
             <div class="movie-info-bottom">
-                <p class="movie-desc">Description: <br><strong><%= movie.description %></strong></p>
+                <div class="genres-desc">
+                    <ul class="movie-genres">
+                        <%genres.forEach((genre) => { %>
+                            <li><button><%= genre %></button></li>
+                        <% }) %>
+                    </ul>
+                    <p class="movie-desc"><%= movie.description %></p>
+                </div>
+                <div class="edit-movie-btns">
+                    <button class="update-btn">Update Movie</button>
+                    <button class="delete-btn">Delete Movie</button>
+                </div>
             </div>
         </div>
     </div>

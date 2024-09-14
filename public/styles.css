@@ -222,6 +222,7 @@ input, textarea {
 
 .movie-name-showcase {
     font-size: 3.5rem;
+    max-width: 55rem;
 }
 
 iframe, img {
@@ -255,6 +256,7 @@ iframe, img {
 
 .movie-desc {
     margin-top: 1.5rem;
+    max-width: 45rem;
 }
 
 .edit-movie-btns {

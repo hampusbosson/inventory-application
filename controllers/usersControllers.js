@@ -135,11 +135,31 @@ const calculateMovieLength = (duration) => {
   return `${hours}h ${remainingMinutes}m`;
 }
 
+async function deleteMovie(req, res) {
+  const movieName = req.params.movieName.replace(/-/g, ' '); 
+
+  try {
+    const movieDeleted = await db.deleteMovie(movieName);
+    if (movieDeleted) {
+      console.log(`Movie: ${movieName} succesfully deleted.`);
+    } else {
+      console.log('Movie could not be deleted.')
+    }
+
+    res.redirect("/movies");
+  } catch(err) {
+    console.error('Error deleting movie', err.message);
+    throw new Error(`Error deleting movie ${err.message}`);
+  }
+
+}
+
 module.exports = {
   getHomePage,
   getMoviePage,
   getGenresPage,
   getNewMoviePage,
   addNewMovie,
-  getMovieShowcasePage
+  getMovieShowcasePage,
+  deleteMovie
 };

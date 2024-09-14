@@ -142,6 +142,21 @@ async function getGenresForMovie(movieName) {
   }
 }
 
+async function deleteMovie(movieName) {
+  const deleteMovieQuery = `
+    DELETE FROM movies 
+    WHERE LOWER(name) = $1;
+  `;
+
+  try {
+    const result = await query(deleteMovieQuery, [movieName.toLowerCase()]);
+    return result.rowCount > 0;
+  } catch(err) {
+    console.error('Error deleting movie: ', err.message);
+    throw new Error(`Error deleting movie: ${err.message}`);
+  }
+}
+
 
 
 module.exports = {
@@ -149,5 +164,6 @@ module.exports = {
   getAllMovies,
   getAllGenres,
   getMovieByName,
-  getGenresForMovie
+  getGenresForMovie,
+  deleteMovie
 };

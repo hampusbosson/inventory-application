@@ -8,6 +8,7 @@ userRouter.get("/genres", usersController.getGenresPage);
 userRouter.get("/movies/new", usersController.getNewMoviePage);
 userRouter.post("/movies/new", usersController.addNewMovie);
 userRouter.get("/movies/:movieName", usersController.getMovieShowcasePage);
+userRouter.post("/movies/:movieName/delete", usersController.deleteMovie);
 
 module.exports = userRouter; 
 

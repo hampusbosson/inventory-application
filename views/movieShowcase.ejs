@@ -50,7 +50,9 @@
                     <p class="movie-desc"><%= movie.description %></p>
                 </div>
                 <div class="edit-movie-btns">
-                    <button class="update-btn">Update Movie</button>
+                    <a href="/movies/<%= movie.name.replace(/\s+/g, '-') %>/update">
+                        <button class="update-btn">Update Movie</button>
+                    </a>
                     <form action="/movies/<%= movie.name.replace(/\s+/g, '-') %>/delete" method="POST">
                         <button class="delete-btn" type="submit">Delete Movie</button>
                     </form>

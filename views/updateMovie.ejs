@@ -1,0 +1,82 @@
+<html></html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1><%= title %></h1>
+        <div class="header-btns">
+            <a href="/genres"><button>GENRES</button></a>
+            <a href="/movies"><button>MOVIES</button></a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="movie-form-container">
+            <form action="/movies/<%= encodeURIComponent(movie.name.toLowerCase().replace(/\s+/g, '-'))%>/update" method="POST" class="movie-form">
+                <div class="form-group">
+                    <label for="mname">Movie Name</label>
+                    <input type="text" name="name" id="name" value="<%= movie.name %>" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year">Release Year</label>
+                    <input type="number" name="year" id="year" min="1900" max="2026" value="<%= movie.releaseyear %>" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="genres">Pick Movie Genres</label>
+                    <div class="genres">
+                        <input type="checkbox" name="genres" value="action" id="genre-action">
+                        <label for="genre-action">Action</label><br>
+                
+                        <input type="checkbox" name="genres" value="comedy" id="genre-comedy">
+                        <label for="genre-comedy">Comedy</label><br>
+                
+                        <input type="checkbox" name="genres" value="drama" id="genre-drama">
+                        <label for="genre-drama">Drama</label><br>
+                
+                        <input type="checkbox" name="genres" value="thriller" id="genre-thriller">
+                        <label for="genre-thriller">Thriller</label><br>
+            
+                        <input type="checkbox" name="genres" value="horror" id="genre-horror">
+                        <label for="genre-horror">Horror</label><br>
+                
+                        <input type="checkbox" name="genres" value="scifi" id="genre-scifi">
+                        <label for="genre-scifi">Sci-Fi</label><br>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <input type="number" name="rating" id="rating" min="1" max="10" value="<%= movie.rating %>" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="duration">Runtime (in minutes)</label>
+                    <input type="number" name="duration" id="duration" min="1" max="1000" value="<%= movie.duration %>" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" rows="4" cols="50" style="resize: vertical;"><%= movie.description %></textarea>
+                </div>
+            
+                <div class="form-group">
+                    <label for="posterURL">Poster URL</label>
+                    <input type="text" name="posterURL" id="posterURL" value="<%= movie.posterurl %>">
+                </div>
+            
+                <div class="form-group">
+                    <label for="trailerURL">Trailer URL</label>
+                    <input type="text" name="trailerURL" id="trailerURL" value="<%= movie.trailerurl %>">
+                </div>
+            
+                <div class="form-group">
+                    <button type="submit" class="form-btn">Update Movie</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

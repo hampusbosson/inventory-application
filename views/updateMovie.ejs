@@ -27,22 +27,22 @@
                 <div class="form-group">
                     <label for="genres">Pick Movie Genres</label>
                     <div class="genres">
-                        <input type="checkbox" name="genres" value="action" id="genre-action">
+                        <input type="checkbox" name="genres" value="action" id="genre-action" <%= genres.includes('action') ? 'checked' : '' %>>
                         <label for="genre-action">Action</label><br>
                 
-                        <input type="checkbox" name="genres" value="comedy" id="genre-comedy">
+                        <input type="checkbox" name="genres" value="comedy" id="genre-comedy" <%= genres.includes('comedy') ? 'checked' : '' %>>
                         <label for="genre-comedy">Comedy</label><br>
                 
-                        <input type="checkbox" name="genres" value="drama" id="genre-drama">
+                        <input type="checkbox" name="genres" value="drama" id="genre-drama" <%= genres.includes('drama') ? 'checked' : '' %>>
                         <label for="genre-drama">Drama</label><br>
                 
-                        <input type="checkbox" name="genres" value="thriller" id="genre-thriller">
+                        <input type="checkbox" name="genres" value="thriller" id="genre-thriller" <%= genres.includes('thriller') ? 'checked' : '' %>>
                         <label for="genre-thriller">Thriller</label><br>
             
-                        <input type="checkbox" name="genres" value="horror" id="genre-horror">
+                        <input type="checkbox" name="genres" value="horror" id="genre-horror" <%= genres.includes('horror') ? 'checked' : '' %>>
                         <label for="genre-horror">Horror</label><br>
                 
-                        <input type="checkbox" name="genres" value="scifi" id="genre-scifi">
+                        <input type="checkbox" name="genres" value="scifi" id="genre-scifi" <%= genres.includes('scifi') ? 'checked' : '' %>>
                         <label for="genre-scifi">Sci-Fi</label><br>
                     </div>
                 </div>

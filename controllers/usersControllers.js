@@ -169,10 +169,12 @@ async function getMovieUpdatePage(req, res) {
   try {
     const movieName = req.params.movieName.replace(/-/g, ' '); 
     const movie = await db.getMovieByName(movieName);
+    const genres = await db.getGenresForMovie(movieName);
 
     res.render("updateMovie", {
       title: pageTitle,
-      movie: movie
+      movie: movie,
+      genres: genres,
     });
 
   } catch (err) {

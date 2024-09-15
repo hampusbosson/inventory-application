@@ -157,6 +157,85 @@ async function deleteMovie(movieName) {
   }
 }
 
+async function updateMovieGenres(movieId, genres) {
+  const deleteGenresQuery = `
+    DELETE FROM movie_genres
+    WHERE movie_id = $1;
+  `;
+
+  const insertGenreQuery = `
+    INSERT INTO movie_genres (movie_id, genre_id)
+    VALUES ($1, $2);
+  `;
+
+  try {
+    await query(deleteGenresQuery, [movieId]);
+
+    for (const genreId of genres) {
+      await query(insertGenreQuery, [movieId, genreId]);
+    }
+  } catch(err) {
+    console.error('Error updating genres: ', err.message);
+    throw new Error(`Error updating genres: ${err.message}`);
+  }
+}
+
+async function updateMovie(
+  movieName, 
+  name,
+  year,
+  genres,
+  rating,
+  duration,
+  description,
+  posterURL,
+  trailerURL) {
+  const movie = await getMovieByName(movieName);
+
+  if (!movie) {
+    throw new Error('Movie not found');
+  }
+  
+  const updateMovieQuery = `
+    UPDATE movies
+    SET 
+      name = $1,
+      releaseyear = $2,
+      rating = $3,
+      duration = $4,
+      description = $5,
+      posterURL = $6,
+      trailerURL = $7
+    WHERE LOWER(name) = $8
+    RETURNING *;
+    `;
+
+  const movieValues = [
+    name,
+    year,
+    rating,
+    duration,
+    description,
+    posterURL,
+    trailerURL,
+    movieName.toLowerCase()
+  ];
+
+  try {
+    const result = await query(updateMovieQuery, movieValues);
+    const updatedMovie = result.rows[0];
+
+    if (genres && genres.length > 0) {
+      updateMovieGenres(updatedMovie.id, genres);
+    }
+
+    return updatedMovie;
+  } catch (err) {
+    console.error('Error updating movie: ', err.message);
+    throw new Error(`Error updating movie: ${err.message}`);
+  }
+}
+
 
 
 module.exports = {
@@ -165,5 +244,6 @@ module.exports = {
   getAllGenres,
   getMovieByName,
   getGenresForMovie,
-  deleteMovie
+  deleteMovie,
+  updateMovie
 };

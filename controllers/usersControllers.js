@@ -105,32 +105,42 @@ async function getMovieShowcasePage(req, res) {
 
   try {
     const movie = await db.getMovieByName(movieName);
+
+    if (!movie) {
+      return res.status(404).send("Movie not found");
+    }
+
     const genres = await db.getGenresForMovie(movieName);
     const runtime = calculateMovieLength(movie.duration);
 
+    // Capitalize genres
     const capitalizedGenres = genres.map(genre => genre.charAt(0).toUpperCase() + genre.slice(1));
-    const youtubeEmededURL = getYouTubeEmbedURL(movie.trailerurl);
 
-    if (movie) {
-      res.render("movieShowCase", {
-        title: pageTitle,
-        movie: movie,
-        runtime: runtime,
-        youtubeURL: youtubeEmededURL,
-        genres: capitalizedGenres
-      })
-    } else {
-      res.status(404).send("Movie not found");
-    }
+    // Safely generate YouTube embed URL only if trailerURL exists
+    const youtubeEmbedURL = movie.trailerurl ? getYouTubeEmbedURL(movie.trailerurl) : null;
+
+    // Render the page with all the required data
+    res.render("movieShowCase", {
+      title: pageTitle,  // Make sure pageTitle is defined
+      movie: movie,
+      runtime: runtime,
+      youtubeURL: youtubeEmbedURL,
+      genres: capitalizedGenres
+    });
+
   } catch(err) {
     console.error('Error fetching movie: ', err.message);
-    throw new Error(`Error fetching movie: ${err.message}`)
+    res.status(500).send("An error occurred while fetching the movie.");
   }
+}
 
+const getYouTubeEmbedURL = (url) => {
+  const videoId = url.split('v=')[1]; // Extract the video ID from the full URL
+  return `https://www.youtube.com/embed/${videoId}`;
 }
 
 const calculateMovieLength = (duration) => {
-  const hours = Math.round(duration / 60);
+  const hours = Math.floor(duration / 60);
 
   const remainingMinutes = duration - (hours * 60);
 
@@ -155,10 +165,61 @@ async function deleteMovie(req, res) {
   }
 }
 
-const getYouTubeEmbedURL = (url) => {
-  const videoId = url.split('v=')[1]; // Extract the video ID from the full URL
-  return `https://www.youtube.com/embed/${videoId}`;
+async function getMovieUpdatePage(req, res) {
+  try {
+    const movieName = req.params.movieName.replace(/-/g, ' '); 
+    const movie = await db.getMovieByName(movieName);
+
+    res.render("updateMovie", {
+      title: pageTitle,
+      movie: movie
+    });
+
+  } catch (err) {
+    console.error("Failed to load page: ", { err });
+    res.status(500).send("an error occured while loading the page.");
+  }
 }
+
+const updateMovie = [
+  validateMovie, 
+  async (req, res) => {
+    const oldMovieName = req.params.movieName.replace(/-/g, ' '); 
+
+    try {
+      const {
+        name,
+        year,
+        rating,
+        duration,
+        description,
+        posterURL,
+        trailerURL,
+        genres
+      } = req.body;
+
+      await db.updateMovie(
+        oldMovieName,
+        name,
+        year,
+        genres,
+        rating,
+        duration,
+        description,
+        posterURL,
+        trailerURL,
+      );
+
+      res.redirect(`/movies/${name.replace(/\s+/g, '-')}`);
+
+    } catch(err) {
+      console.error('Error updating movie', err.message);
+      throw new Error(`Error updating movie ${err.message}`);
+    }
+  }
+]
+
+
 
 module.exports = {
   getHomePage,
@@ -167,5 +228,7 @@ module.exports = {
   getNewMoviePage,
   addNewMovie,
   getMovieShowcasePage,
-  deleteMovie
+  deleteMovie,
+  getMovieUpdatePage,
+  updateMovie
 };

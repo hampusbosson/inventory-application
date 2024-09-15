@@ -186,7 +186,7 @@ async function getMovieUpdatePage(req, res) {
 const updateMovie = [
   validateMovie, 
   async (req, res) => {
-    const oldMovieName = req.params.movieName.replace(/-/g, ' '); 
+    const movieName = req.params.movieName.replace(/-/g, ' '); 
 
     try {
       const {
@@ -196,12 +196,22 @@ const updateMovie = [
         duration,
         description,
         posterURL,
-        trailerURL,
-        genres
+        trailerURL
       } = req.body;
 
+      let genres = req.body.genres;
+
+      // Ensure genres is always an array, even if it's undefined or empty
+      if (!genres) {
+        genres = [];
+      } else if (!Array.isArray(genres)) {
+        genres = [genres];
+      }
+
+      console.log(genres);
+
       await db.updateMovie(
-        oldMovieName,
+        movieName,
         name,
         year,
         genres,
@@ -214,12 +224,12 @@ const updateMovie = [
 
       res.redirect(`/movies/${name.replace(/\s+/g, '-')}`);
 
-    } catch(err) {
-      console.error('Error updating movie', err.message);
-      throw new Error(`Error updating movie ${err.message}`);
+    } catch (err) {
+      console.error('Error updating movie:', err.message);
+      res.status(500).send(`Error updating movie ${err.message}`);
     }
   }
-]
+];
 
 
 

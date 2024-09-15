@@ -169,12 +169,23 @@ async function updateMovieGenres(movieId, genres) {
   `;
 
   try {
+    // Delete old genres
     await query(deleteGenresQuery, [movieId]);
 
-    for (const genreId of genres) {
-      await query(insertGenreQuery, [movieId, genreId]);
+    if (genres.length === 0) {
+      return;
     }
-  } catch(err) {
+
+    // Insert new genres by fetching their IDs
+    for (const genreName of genres) {
+      const genreId = await getGenreIdByName(genreName);
+      if (genreId) {
+        await query(insertGenreQuery, [movieId, genreId]);
+      } else {
+        console.error(`Genre "${genreName}" not found`);
+      }
+    }
+  } catch (err) {
     console.error('Error updating genres: ', err.message);
     throw new Error(`Error updating genres: ${err.message}`);
   }
@@ -189,7 +200,8 @@ async function updateMovie(
   duration,
   description,
   posterURL,
-  trailerURL) {
+  trailerURL
+) {
   const movie = await getMovieByName(movieName);
 
   if (!movie) {
@@ -208,7 +220,7 @@ async function updateMovie(
       trailerURL = $7
     WHERE LOWER(name) = $8
     RETURNING *;
-    `;
+  `;
 
   const movieValues = [
     name,
@@ -225,9 +237,7 @@ async function updateMovie(
     const result = await query(updateMovieQuery, movieValues);
     const updatedMovie = result.rows[0];
 
-    if (genres && genres.length > 0) {
-      updateMovieGenres(updatedMovie.id, genres);
-    }
+    await updateMovieGenres(updatedMovie.id, genres); // Add 'await' here
 
     return updatedMovie;
   } catch (err) {

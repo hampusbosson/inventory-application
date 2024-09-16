@@ -11,6 +11,7 @@ userRouter.get("/movies/:movieName", usersController.getMovieShowcasePage);
 userRouter.post("/movies/:movieName/delete", usersController.deleteMovie);
 userRouter.get("/movies/:movieName/update", usersController.getMovieUpdatePage);
 userRouter.post("/movies/:movieName/update", usersController.updateMovie);
+userRouter.get("/genres/:genre", usersController.getGenreShowcasePage);
 
 
 module.exports = userRouter; 

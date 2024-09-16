@@ -32,8 +32,52 @@ body {
     max-width: 100%;
 }
 
+.main-content-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+    max-width: 100%;
+    margin-top: 3rem;
+}
+
+.welcome-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.welcome-text > h1 {
+    font-size: 4.5rem;
+}
+
+.welcome-para {
+    margin-top: -0.7rem;
+    width: 65%;
+    text-align: center;
+    font-size: 1.7rem;
+}
+
+.explore-btns {
+    margin-top: 6rem;
+    display: flex;
+    gap: 4rem;
+}
+
+.explore-btns > a {
+    padding: 2rem;
+    border: 1px solid white;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
 a {
     text-decoration: none;
+    color: white;
 }
 
 button {

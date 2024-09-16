@@ -145,7 +145,7 @@ async function getGenresForMovie(movieName) {
 
 async function getMoviesForGenre(genreName) {
   const getMoviesQuery = `
-  SELECT m.name
+  SELECT m.*
   FROM movies m
   JOIN movie_genres mg ON m.id = mg.movie_id
   JOIN genres g ON mg.genre_id = g.id

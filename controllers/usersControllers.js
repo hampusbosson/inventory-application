@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const { get } = require("../routes/usersRouter");
 
 const pageTitle = "MovieHub";
 const movieLengthErr = "must be between 1 and 30 charachters";
@@ -231,6 +232,27 @@ const updateMovie = [
   }
 ];
 
+async function getGenreShowcasePage(req, res) {
+  const genreName = req.params.genre;
+  
+  const genreNameCapitalized = genreName.charAt(0).toUpperCase() + genreName.slice(1);
+
+  try {
+    const movies = await db.getMoviesForGenre(genreName);
+
+     console.log(movies);
+
+    res.render("genreShowcase", {
+      title: pageTitle,
+      movies: movies,
+      genreName: genreNameCapitalized
+    })
+  } catch(err) {
+    console.error('Error fetching genre:', err.message);
+    res.status(500).send("An error occurred while fetching the genre.");
+  }
+}
+
 
 
 module.exports = {
@@ -242,5 +264,6 @@ module.exports = {
   getMovieShowcasePage,
   deleteMovie,
   getMovieUpdatePage,
-  updateMovie
+  updateMovie,
+  getGenreShowcasePage
 };

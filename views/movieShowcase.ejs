@@ -44,7 +44,7 @@
                 <div class="genres-desc">
                     <ul class="movie-genres">
                         <%genres.forEach((genre) => { %>
-                            <li><button><%= genre %></button></li>
+                            <a href="/genres/<%=genre%>"><li><button><%= genre %></button></li></a>
                         <% }) %>
                     </ul>
                     <p class="movie-desc"><%= movie.description %></p>

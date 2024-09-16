@@ -17,13 +17,13 @@
         </div>
         <div class="genre-list-container">
             <ul class="genre-list">
-                <% genres.forEach((genre) => { %>
+                <% genres.forEach((genre, index) => { %>
                     <li class="genre-entry">
-                        <a href="/genres/<%= encodeURIComponent(genre.toLowerCase().replace(/\s+/g, '-')) %>" class="genre-card-link">
+                        <a href="/genres/<%= encodeURIComponent(genre.name.toLowerCase().replace(/\s+/g, '-')) %>" class="genre-card-link">
                             <button class="genre-card-btn">
                                 <div class="genre-card">
-                                    <img src="<%= genre.posterurl %>" alt="Genre poster for <%= genre.name %>" class="genre-img">
-                                    <div class="genre-name"> <%= genre === 'scifi' ? 'Sci-fi' : genre %></div>
+                                    <img src="<%= genre.posterurl %>" alt="Genre poster for <%= genreNames[index] %>" class="genre-img">
+                                    <div class="genre-name"> <%= genreNames[index] %></div>
                                 </div>
                             </button>
                         </a>
@@ -32,7 +32,5 @@
             </ul>
         </div>
     </div>
-
-
 </body>
 </html>

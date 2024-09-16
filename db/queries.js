@@ -103,8 +103,8 @@ async function getAllGenres() {
   try {
     const result = await query(getAllGenresQuery);
 
-    return result.rows.map(row => row.name.charAt(0).toUpperCase() + row.name.slice(1));
-    
+    return result.rows;
+
   } catch(err) {
     console.error('Error getting genres:', err.message);
     throw new Error(`Error getting genres: ${err.message}`);

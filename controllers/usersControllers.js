@@ -46,9 +46,12 @@ async function getGenresPage (req, res) {
   try {
     const genres = await db.getAllGenres();
 
+    const genreNames = genres.map(genre => genre.name.charAt(0).toUpperCase() + genre.name.slice(1));
+
     res.render("genres", {
       title: pageTitle,
       genres: genres,
+      genreNames: genreNames
     });
   } catch (err) {
     console.error("Failder to load page: ", err);

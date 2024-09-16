@@ -23,7 +23,7 @@
                             <button class="genre-card-btn">
                                 <div class="genre-card">
                                     <img src="<%= genre.posterurl %>" alt="Genre poster for <%= genreNames[index] %>" class="genre-img">
-                                    <div class="genre-name"> <%= genreNames[index] %></div>
+                                    <div class="genre-name"> <%= genreNames[index] === 'Scifi' ? 'Sci-Fi' : genreNames[index] %></div>
                                 </div>
                             </button>
                         </a>

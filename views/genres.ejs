@@ -14,12 +14,19 @@
     <div class="main-content">
         <div class="genre-top">
             <h1>All Genres</h1>
+        </div>
         <div class="genre-list-container">
             <ul class="genre-list">
                 <% genres.forEach((genre) => { %>
                     <li class="genre-entry">
-                        <img src="" alt="">
-                        <div class="genre-name"> <%= genre.name %></div>
+                        <a href="/genres/<%= encodeURIComponent(genre.toLowerCase().replace(/\s+/g, '-')) %>" class="genre-card-link">
+                            <button class="genre-card-btn">
+                                <div class="genre-card">
+                                    <img src="<%= genre.posterurl %>" alt="Genre poster for <%= genre.name %>" class="genre-img">
+                                    <div class="genre-name"> <%= genre === 'scifi' ? 'Sci-fi' : genre %></div>
+                                </div>
+                            </button>
+                        </a>
                     </li>
                 <% }) %>
             </ul>

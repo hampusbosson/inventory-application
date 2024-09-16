@@ -103,7 +103,8 @@ async function getAllGenres() {
   try {
     const result = await query(getAllGenresQuery);
 
-    return result.rows;
+    return result.rows.map(row => row.name.charAt(0).toUpperCase() + row.name.slice(1));
+    
   } catch(err) {
     console.error('Error getting genres:', err.message);
     throw new Error(`Error getting genres: ${err.message}`);
@@ -139,6 +140,24 @@ async function getGenresForMovie(movieName) {
   } catch (err) {
     console.error('Error fetching genres: ', err.message);
     throw new Error(`Error fetching genres: ${err.message}`);
+  }
+}
+
+async function getMoviesForGenre(genreName) {
+  const getMoviesQuery = `
+  SELECT m.name
+  FROM movies m
+  JOIN movie_genres mg ON m.id = mg.movie_id
+  JOIN genres g ON mg.genre_id = g.id
+  WHERE LOWER (g.name) = $1;
+  `
+
+  try {
+    const result = await query(getMoviesQuery, [genreName.toLowerCase()]);
+    return result.rows;
+  } catch (err) {
+    console.error('Error fetching movies: ', err.message);
+    throw new Error(`Error fetching movies: ${err.message}`);
   }
 }
 
@@ -255,5 +274,6 @@ module.exports = {
   getMovieByName,
   getGenresForMovie,
   deleteMovie,
-  updateMovie
+  updateMovie,
+  getMoviesForGenre
 };

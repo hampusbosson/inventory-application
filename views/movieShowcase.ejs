@@ -58,6 +58,23 @@
                     </form>
                 </div>
             </div>
+            <div class="movie-small-screen">
+                <div class="imbd-rating-small">
+                    <p class="imdb">IMDb RATING</p>
+                    <p class="movie-rating">
+                        <img src="/icons/star.png" alt="star-icon" class="star-icon">
+                        <span class="rating-number"><%= movie.rating %></span> <span class="rating-total">/10</span>
+                    </p>
+                </div>
+                <div class="edit-movie-btns-small">
+                    <a href="/movies/<%= movie.name.replace(/\s+/g, '-') %>/update">
+                        <button class="update-btn">Update Movie</button>
+                    </a>
+                    <form action="/movies/<%= movie.name.replace(/\s+/g, '-') %>/delete" method="POST">
+                        <button class="delete-btn" type="submit">Delete Movie</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>

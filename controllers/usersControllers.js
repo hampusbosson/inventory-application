@@ -1,6 +1,5 @@
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
-const { get } = require("../routes/usersRouter");
 
 const pageTitle = "MovieHub";
 const movieLengthErr = "must be between 1 and 30 charachters";
